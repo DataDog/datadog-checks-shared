@@ -29,8 +29,9 @@ def validate_py3(path_to_module):
             linter.check(path_to_module)
             linter.generate_reports()
         raw_results = json.loads(out.getvalue() or "{}")
+        print(raw_results)
 
-    results = defaultdict(list)
+    results = []
     for problem in raw_results:
         # An issue found by pylint is a dict like
         # {
@@ -44,8 +45,8 @@ def validate_py3(path_to_module):
         #     "symbol": "dict-iter-method",co
         #     "module": "file"
         # }
-        results[problem["path"]].append(
-            "Line {}, column {}: {}".format(problem["line"], problem["column"], problem["message"])
+        results.append(
+            {"message": "Line {}, column {}: {}".format(problem["line"], problem["column"], problem["message"])}
         )
 
     return results

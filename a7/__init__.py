@@ -1,7 +1,7 @@
 # (C) Datadog, Inc. 2018
 # All rights reserved
 # Licensed under a 3-clause BSD style license (see LICENSE)
-
+import json
 import os
 import sys
 
@@ -23,4 +23,6 @@ def main():
 
     results = validate_py3(file_path)
     if results:
-        print(results[file_path])
+        print(json.dumps(results))
+    else:
+        print('[]')
