@@ -1,6 +1,7 @@
 # (C) Datadog, Inc. 2018
 # All rights reserved
 # Licensed under a 3-clause BSD style license (see LICENSE)
+
 from io import open
 from os import path
 
@@ -9,22 +10,13 @@ from setuptools import setup
 
 HERE = path.dirname(path.abspath(__file__))
 
-with open(path.join(HERE, 'datadog_checks', 'shared', '__about__.py'), 'r', encoding='utf-8') as f:
-    for line in f:
-        line = line.strip()
-        if line.startswith('__version__'):
-            VERSION = line.split('=')[1].strip(' \'"')
-            break
-    else:
-        VERSION = '0.0.1'
-
 with open(path.join(HERE, 'README.md'), 'r', encoding='utf-8') as f:
     README = f.read()
 
 
 setup(
-    name='datadog_checks_shared',
-    version=VERSION,
+    name='datadog-a7',
+    version="0.0.1",
 
     description='The Datadog Checks Shared Tools',
     long_description=README,
@@ -50,13 +42,13 @@ setup(
         'Programming Language :: Python :: Implementation :: PyPy',
     ],
 
-    packages=['datadog_checks', 'datadog_checks.shared'],
-    install_requires=['click', 'pylint'],
+    packages=['a7'],
+    install_requires=['pylint'],
     include_package_data=True,
 
     entry_points={
         'console_scripts': [
-            'ddshared = datadog_checks.shared.cli:ddshared',
+            'a7_validate = a7:main',
         ],
     },
 )
