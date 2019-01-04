@@ -4,7 +4,6 @@
 
 import json
 from contextlib import closing
-from collections import defaultdict
 try:
     from StringIO import StringIO
 except ImportError:
@@ -45,7 +44,10 @@ def validate_py3(path_to_module):
         #     "module": "file"
         # }
         results.append(
-            {"message": "Line {}, column {}: {}".format(problem["line"], problem["column"], problem["message"])}
+            {
+                "message": "Line {}, column {}: {}".format(problem["line"], problem["column"], problem["message"]),
+                "path": problem["path"],
+            }
         )
 
     return results
