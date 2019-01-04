@@ -29,7 +29,6 @@ def validate_py3(path_to_module):
             linter.check(path_to_module)
             linter.generate_reports()
         raw_results = json.loads(out.getvalue() or "{}")
-        print(raw_results)
 
     results = []
     for problem in raw_results:
