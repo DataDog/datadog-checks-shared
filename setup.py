@@ -43,7 +43,7 @@ setup(
     ],
 
     packages=['a7'],
-    install_requires=['pylint'],
+    install_requires=['pylint', 'six'],
     include_package_data=True,
 
     entry_points={
