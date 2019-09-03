@@ -4,6 +4,7 @@
 
 import json
 from contextlib import closing
+import sys
 try:
     from StringIO import StringIO
 except ImportError:
@@ -25,7 +26,15 @@ def validate_py3(path_to_module):
         # cf https://www.python.org/dev/peps/pep-0328/
         linter.disable("no-absolute-import")
         with fix_import_path([path_to_module]):
-            linter.check(path_to_module)
+            syspath = sys.path[:]
+            try:
+                # Remove site-packages from imports. It keeps the standard
+                # library, but it prevents pylint from parsing potentially big
+                # third party modules.
+                sys.path = [p for p in syspath if 'site-packages' not in p]
+                linter.check(path_to_module)
+            finally:
+                sys.path = syspath
             linter.generate_reports()
         raw_results = json.loads(out.getvalue() or "{}")
 
