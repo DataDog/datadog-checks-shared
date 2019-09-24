@@ -10,8 +10,12 @@ try:
 except ImportError:
     from io import StringIO
 
+try:
+    from pylint.reporters.json import JSONReporter
+except ImportError:
+    from pylint.reporters import JSONReporter
+
 from pylint.lint import PyLinter, fix_import_path
-from pylint.reporters import JSONReporter
 
 
 def validate_py3(path_to_module):
