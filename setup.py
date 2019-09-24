@@ -16,7 +16,7 @@ with open(path.join(HERE, 'README.md'), 'r', encoding='utf-8') as f:
 
 setup(
     name='datadog-a7',
-    version="0.0.7",
+    version="0.0.8",
 
     description='The Datadog Checks Shared Tools',
     long_description=README,
